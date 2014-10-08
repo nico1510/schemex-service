@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/schemex-service">
+    
+    <Resource name="jdbc/virtuoso" auth="Container" type="javax.sql.DataSource"
+            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+            username="dba" password="dba" driverClassName="virtuoso.jdbc3.Driver"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            removeAbandonedTimeout="60"
+            removeAbandoned="true"
+            logAbandoned="true"
+            url="jdbc:virtuoso://webschemex.west.uni-koblenz.de:1111"/>
+    
+        <Resource name="jdbc/cache" auth="Container" type="javax.sql.DataSource"
+            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+            username="virtuoso_user" password="virtuoso_pw" driverClassName="org.postgresql.Driver"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            removeAbandonedTimeout="60"
+            removeAbandoned="true"
+            logAbandoned="true"
+            url="jdbc:postgresql://localhost:5432/virtuoso_cache"/>
+</Context>

@@ -11,7 +11,7 @@ or any other SQL Database. This database will be used as cache storage
    1. CREATE ROLE virtuoso_user WITH LOGIN ENCRYPTED PASSWORD 'virtuoso_pw';
    2. CREATE DATABASE virtuoso_cache WITH OWNER virtuoso_user;
 
-username and password are of course free to choose but have to be changed also in [context.xml](../master/web/META-INF/context.xml)
+   username and password are of course free to choose but have to be changed also in [context.xml](../master/web/META-INF/context.xml)
 7. Deploy this application to tomcat and restart tomcat in order to add the 2 jdbc drivers to the classpath
 
 

@@ -56,7 +56,7 @@ public class LiteqServlet extends HttpServlet {
                             + "?tc <http://schemex.west.uni-koblenz.de/hasClass> ?type .}";
                     result = TripleStoreBean.answerLiteqQuery(query, true);
                 } else {
-                    // get types for type cluster param1
+                    // get types for type cluster uri
                     query = "sparql select ?type WHERE "
                             + "{ <" + uri + "> a <http://schemex.west.uni-koblenz.de/TypeCluster> ."
                             + " <" + uri + "> <http://schemex.west.uni-koblenz.de/hasClass> ?type .}";
@@ -70,14 +70,21 @@ public class LiteqServlet extends HttpServlet {
                     result = TripleStoreBean.answerLiteqQuery(query, true);
                     break;
             case "eqc":
-                // get all equivalence classes for type cluster param1
+                // get all equivalence classes for type cluster uri
                 query = "sparql select ?eqc WHERE "
                         + "{ <" + uri + "> a <http://schemex.west.uni-koblenz.de/TypeCluster> ."
                         + " ?eqc a <http://schemex.west.uni-koblenz.de/EquivalenceClass> ."
                         + " <" + uri + "> <http://schemex.west.uni-koblenz.de/hasSubset> ?eqc .}";
                 result = TripleStoreBean.answerLiteqQuery(query, true);
                 break;
-
+            case "eqcForProperty":
+                // get equivalence classes for property uri
+                query = "sparql select ?eqc WHERE { "
+                        + "?tc a <http://schemex.west.uni-koblenz.de/TypeCluster> . "
+                        + "?eqc a <http://schemex.west.uni-koblenz.de/EquivalenceClass> . "
+                        + "?eqc <" + uri + "> ?tc . }";
+                result = TripleStoreBean.answerLiteqQuery(query, true);
+                break;
             case "entities":
                 query = "sparql select ?example WHERE { <" + uri + "> a <http://schemex.west.uni-koblenz.de/EquivalenceClass> ."
                 + " <" + uri + "> <http://schemex.west.uni-koblenz.de/hasDataset> ?dataset ."
@@ -86,7 +93,7 @@ public class LiteqServlet extends HttpServlet {
                 break;
 
             case "properties":
-                // get all properties for equivalence class param1
+                // get all properties for equivalence class uri
                 query = "sparql select ?prop WHERE { "
                         + "?tc a <http://schemex.west.uni-koblenz.de/TypeCluster> . "
                         + "<" + uri + "> a <http://schemex.west.uni-koblenz.de/EquivalenceClass> . "
@@ -95,7 +102,7 @@ public class LiteqServlet extends HttpServlet {
                 break;
 
             case "mappings":
-                // get all mappings for equivalence class param1
+                // get all mappings for equivalence class uri
                 query = "sparql select ?tc, ?prop WHERE { "
                         + "?tc a <http://schemex.west.uni-koblenz.de/TypeCluster> . "
                         + "<" + uri + "> a <http://schemex.west.uni-koblenz.de/EquivalenceClass> . "
